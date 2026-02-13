@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz San Valentín</title>
+    
+    <!-- OPEN GRAPH -->
+    <meta property="og:title" content="¡Tengo una sorpresa para ti! ❤️">
+    <meta property="og:description" content="He preparado algo especial por San Valentín. Entra para verlo.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:url" content="https://leo-cordova.github.io/Tarjeta_san_valentin/">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'handwriting': ['"Great Vibes"', 'cursive'],
+                        'body': ['"Nunito"', 'sans-serif'],
+                    },
+                    colors: {
+                        'love-red': '#FF4D6D',
+                        'love-pink': '#FF8FA3',
+                        'love-bg': '#FFF0F3',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+                        'popup': 'popup 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards',
+                        'bloom': 'bloom 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        heartbeat: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                        },
+                        popup: {
+                            '0%': { transform: 'scale(0)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        bloom: {
+                            '0%': { transform: 'scale(0) translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'scale(1) translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.2);
+            animation: float-up linear infinite;
+        }
+        @keyframes float-up {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF0F3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF8FA3;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="font-body bg-love-bg text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Fondo Animado -->
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <!-- Navegación Simple -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm top-0 py-3">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <span class="font-handwriting text-3xl text-love-red">Para Ti: Luz Maria</span>
+            <div class="text-love-red">
+                <i data-lucide="heart" class="w-6 h-6 fill-current animate-heartbeat"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative z-10 min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16">
+        <div class="bg-white/60 backdrop-blur-sm p-8 rounded-3xl shadow-xl max-w-lg w-full border border-white">
+            <span class="inline-block py-1 px-3 rounded-full bg-love-pink/20 text-love-red text-sm font-bold mb-4 tracking-wider">14 DE FEBRERO</span>
+            <h1 class="font-handwriting text-6xl md:text-7xl text-love-red mb-4">Feliz San Valentín</h1>
+            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                Porque cada día a tu lado es mi día favorito.<br>Gracias por ser mi persona especial.
+            </p>
+            
+            <div class="relative w-48 h-48 mx-auto mb-8 group cursor-pointer">
+                <!-- Marco de foto circular -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-love-red to-love-pink rounded-full p-1 animate-spin-slow"></div>
+                <div class="absolute inset-1 bg-white rounded-full overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 bg-love-red/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-full flex items-center justify-center">
+                        <p class="text-sm text-white font-bold">Nosotros ❤️</p>
+                   </div>
+                   <img src="/imagen/nosotros.jpg" alt="Nosotros" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('reasons').scrollIntoView()" class="bg-love-red hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 flex items-center justify-center gap-2 mx-auto">
+                <span>Descubre por qué te amo</span>
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sección: Nuestra Canción -->
+    <section class="relative z-10 py-16 px-4">
+        <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6 flex items-center space-x-4 transform rotate-1 hover:rotate-0 transition duration-300">
+            <div class="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <i data-lucide="music" class="text-white w-8 h-8"></i>
+                </div>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-bold text-love-red tracking-wide uppercase">Nuestra Canción</p>
+                <h3 class="text-lg font-bold text-gray-800">Mi persona favorita</h3>
+                <p class="text-sm text-gray-500">Rio Roma</p>
+                
+                <!-- Barra de progreso simulada -->
+                <div class="w-full bg-gray-200 rounded-full h-1.5 mt-3">
+                    <div class="bg-love-red h-1.5 rounded-full w-2/3"></div>
+                </div>
+                <div class="flex justify-between text-[10px] text-gray-400 mt-1">
+                    <span>2:14</span>
+                    <span>4:23</span>
+                </div>
+            </div>
+             <!-- enlace a la plataforma de musica -->
+            <a href="https://music.youtube.com/watch?v=MHDAt4Ho2Hg&si=29iSlEBCPhpZoeJk" target="_blank">
+                <button class="w-10 h-10 bg-love-red rounded-full flex items-center justify-center text-white shadow-md hover:scale-110 transition">
+                    <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección: Razones (Interactivo) -->
+    <section id="reasons" class="relative z-10 py-20 px-4">
+        <div class="text-center mb-12">
+            <h2 class="font-handwriting text-5xl text-love-red mb-2">Razones por las que te amo ❤️</h2>
+            <p class="text-gray-500">Desliza para ver más</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Razón 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-love-pink">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-love-red">
+                        <i data-lucide="smile" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Tu Sonrisa</h3>
+                    <p class="text-gray-600">Porque tienes esa capacidad mágica de alegrarme el día con un solo gesto.
+                        y con tus caricias me calmas el alma.
+                    </p>
+                </div>
+
+                <!-- Razón 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-love-red">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-love-red">
+                        <i data-lucide="coffee" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Nuestros Momentos</h3>
+                    <p class="text-gray-600">Desde los cafés por la mañana, los chisme y nuestros tiernos abrazos por la noche.</p>
+                </div>
+
+                <!-- Razón 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 border-b-4 border-love-pink">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 text-love-red">
+                        <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Tu Apoyo</h3>
+                    <p class="text-gray-600">Por estar siempre ahí, en los momentos dificiles y por ser el sustento del hogar 🤗 (hasta que me toque a mi 😏). </p>
+                </div>
+            </div>
+
+            <!-- Botón generador de mensajes aleatorios -->
+            <div class="mt-12 text-center">
+                <div id="random-msg-container" class="hidden mb-6 p-4 bg-white/80 rounded-xl border border-love-pink shadow-inner max-w-md mx-auto">
+                    <p id="random-msg-text" class="text-lg font-handwriting text-love-red text-3xl"></p>
+                </div>
+                <button onclick="showRandomMessage()" class="text-love-red font-bold underline decoration-2 underline-offset-4 hover:text-red-700 transition">
+                    ¿Quieres saber un secreto? presiona aquí.
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Cuponera de Amor -->
+    <section class="relative z-10 py-16 px-4 bg-white/50">
+        <div class="container mx-auto max-w-2xl text-center">
+            <h2 class="font-handwriting text-5xl text-gray-800 mb-8">Cuponera de Regalo</h2>
+            <div class="space-y-4 mb-8">
+                
+                <!-- Cupón 1 -->
+                <div class="group relative bg-white border-2 border-dashed border-love-red p-6 rounded-xl flex items-center justify-between hover:bg-red-50 transition cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-love-red/10 p-3 rounded-full text-love-red">
+                            <i data-lucide="utensils" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-lg">Cena Para tres 🧑🏻‍👩🏼‍👦🏻</h4>
+                            <p class="text-xs text-gray-500">Válido en nuestro lugar favorito</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-love-red uppercase tracking-wide border border-love-red px-2 py-1 rounded status-text">Canjear</span>
+                </div>
+
+                <!-- Cupón 2 -->
+                <div class="group relative bg-white border-2 border-dashed border-love-red p-6 rounded-xl flex items-center justify-between hover:bg-red-50 transition cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-love-red/10 p-3 rounded-full text-love-red">
+                            <i data-lucide="film" class="w-6 h-6"></i>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-bold text-lg">Noche de Películas 🎞️</h4>
+                            <p class="text-xs text-gray-500">Tú eliges la película y yo pongo las palomitas 🍿</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold text-love-red uppercase tracking-wide border border-love-red px-2 py-1 rounded status-text">Canjear</span>
+                </div>
+            </div>
+
+            <!-- Botón Sorpresa Extra -->
+            <button onclick="showRoses()" class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-gradient-to-r from-red-500 to-pink-600 rounded-full hover:scale-105 hover:shadow-xl focus:outline-none ring-offset-2 focus:ring-2 ring-red-400 animate-bounce">
+                <i data-lucide="gift" class="w-5 h-5 mr-2 animate-pulse"></i>
+                Presiona aquí. ¡tengo una sorpresa! 😊
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-white py-8 text-center">
+        <p class="font-handwriting text-3xl text-love-red mb-2">Con todo mi amor</p>
+        <p class="text-gray-500 text-sm">GRACIAS POR SER PARTE DE MI VIDA ❤️</p>
+        <div class="mt-4 flex justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-love-red"></span>
+            <span class="w-2 h-2 rounded-full bg-love-pink"></span>
+            <span class="w-2 h-2 rounded-full bg-love-red"></span>
+        </div>
+    </footer>
+
+    <!-- Overlay de Rosas (Oculto por defecto) -->
+    <div id="roses-overlay" class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center backdrop-blur-sm transition-opacity duration-500">
+        <div class="relative w-full max-w-lg p-8 text-center">
+            <!-- Botón Cerrar -->
+            <button onclick="hideRoses()" class="absolute top-0 right-4 text-white/70 hover:text-white transition p-2">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <!-- Contenedor del Ramo -->
+            <div class="relative mb-8 h-64 flex items-center justify-center">
+                <!-- Rosas animadas (Emojis escalados) -->
+                <div class="absolute text-[80px] transform translate-y-4 translate-x-0 animate-bloom" style="animation-delay: 0.1s; z-index: 10;">🌹</div>
+                <div class="absolute text-[70px] transform -translate-x-12 translate-y-8 -rotate-12 animate-bloom" style="animation-delay: 0.3s; z-index: 5;">🌹</div>
+                <div class="absolute text-[70px] transform translate-x-12 translate-y-8 rotate-12 animate-bloom" style="animation-delay: 0.4s; z-index: 5;">🌹</div>
+                <div class="absolute text-[60px] transform -translate-x-6 -translate-y-8 -rotate-6 animate-bloom" style="animation-delay: 0.5s; z-index: 1;">🌹</div>
+                <div class="absolute text-[60px] transform translate-x-6 -translate-y-8 rotate-6 animate-bloom" style="animation-delay: 0.6s; z-index: 1;">🌹</div>
+                
+                <!-- Brillos -->
+                <div class="absolute top-0 left-10 text-yellow-300 animate-pulse">✨</div>
+                <div class="absolute bottom-10 right-10 text-yellow-300 animate-pulse" style="animation-delay: 0.5s">✨</div>
+            </div>
+
+            <!-- Texto -->
+            <div class="animate-popup" style="animation-delay: 0.8s; opacity: 0; animation-fill-mode: forwards;">
+                <h3 class="font-handwriting text-5xl text-white mb-4 drop-shadow-lg">Para la flor más bella</h3>
+                <p class="text-pink-200 text-lg font-body">Ni todas las rosas del mundo se comparan contigo.</p>
+                <p class="text-white/80 text-sm mt-4 italic">¡Te amo mi Lulu!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para lógica e interacciones -->
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // 1. Generación de Fondo de Corazones
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.classList.add('floating-heart');
+            
+            // Posición aleatoria
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamaño aleatorio
+            const size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + 'px';
+            
+            // Duración aleatoria
+            const duration = Math.random() * 5 + 5;
+            heart.style.animationDuration = duration + 's';
+            
+            // Opacidad
+            heart.style.opacity = Math.random() * 0.5 + 0.1;
+
+            document.getElementById('heart-bg').appendChild(heart);
+
+            // Eliminar después de la animación para no saturar memoria
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Crear corazones continuamente
+        setInterval(createHeart, 500);
+
+
+        // 2. Mensajes Aleatorios (Secretos)
+        const secretMessages = [
+            "Eres mi casualidad favorita.",
+            "Me encanta cómo se iluminan tus ojos cuando ríes.",
+            "Gracias por ser mi paz en el caos.",
+            "Te elegiría a ti, una y mil veces.",
+            "Quiero estar contigo para siempre, en esta vida y en la proxima."
+        ];
+
+        function showRandomMessage() {
+            const container = document.getElementById('random-msg-container');
+            const textElement = document.getElementById('random-msg-text');
+            
+            // Efecto simple de fade
+            container.classList.remove('hidden');
+            const randomMsg = secretMessages[Math.floor(Math.random() * secretMessages.length)];
+            textElement.textContent = `"${randomMsg}"`;
+        }
+
+        // 3. Canjear Cupones
+        function redeemCoupon(element) {
+            const statusBadge = element.querySelector('.status-text');
+            
+            if (statusBadge.innerText === "CANJEAR") {
+                statusBadge.innerText = "CANJEADO ✓";
+                statusBadge.classList.remove('text-love-red', 'border-love-red');
+                statusBadge.classList.add('text-white', 'bg-green-500', 'border-green-500');
+                element.classList.add('opacity-50', 'pointer-events-none');
+                
+                // Efecto de confeti simple (simulado con alerta visual)
+                // En un app real usaríamos canvas-confetti, aquí mantenemos simple
+                alert("¡Cupón validado! ❤️ Envíame captura de pantalla para cobrarlo.");
+            }
+        }
+
+        // 4. Funciones para el Ramo de Rosas (Sorpresa Extra)
+        function showRoses() {
+            const overlay = document.getElementById('roses-overlay');
+            overlay.classList.remove('hidden');
+            // Reiniciar animación si se vuelve a abrir (pequeño truco recargando contenido o simplemente mostrando)
+            // Para simplicidad, solo mostramos. La animación CSS 'forwards' ya habrá corrido si se oculta y muestra,
+            // pero para reiniciar la animación de bloom, podríamos resetear clases.
+            
+            // Resetear animaciones
+            const blooms = overlay.querySelectorAll('.animate-bloom');
+            blooms.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; /* trigger reflow */
+                el.style.animation = null; 
+            });
+        }
+
+        function hideRoses() {
+            document.getElementById('roses-overlay').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
